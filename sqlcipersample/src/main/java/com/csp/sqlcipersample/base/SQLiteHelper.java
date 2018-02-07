@@ -1,16 +1,17 @@
-package com.csp.sqlitesample.base;
+package com.csp.sqlcipersample.base;
 
 import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 import com.csp.database.operate.base.SqlGenerate;
 import com.csp.database.operate.bean.TableField;
 import com.csp.database.operate.interfaces.SQLiteHelperInterface;
-import com.csp.sqlitesample.config.DatabaseConfig;
-import com.csp.sqlitesample.config.TableFields;
+import com.csp.sqlcipersample.config.DatabaseConfig;
+import com.csp.sqlcipersample.config.TableFields;
 import com.csp.sqlitesample.util.LogCat;
+
+import net.sqlcipher.Cursor;
+import net.sqlcipher.database.SQLiteDatabase;
+import net.sqlcipher.database.SQLiteOpenHelper;
 
 /**
  * Description: SQLiteOpenHelper 工具类
@@ -28,6 +29,7 @@ public class SQLiteHelper extends SQLiteOpenHelper implements SQLiteHelperInterf
 
 	private SQLiteHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
+		SQLiteDatabase.loadLibs(context);
 		this.context = context;
 	}
 
@@ -60,7 +62,7 @@ public class SQLiteHelper extends SQLiteOpenHelper implements SQLiteHelperInterf
 
 	@Override
 	public synchronized void createDatabase(String password) {
-		getWritableDatabase();
+		getWritableDatabase(password);
 		openDatabaseCount++;
 		closeDatabase();
 	}
@@ -80,7 +82,7 @@ public class SQLiteHelper extends SQLiteOpenHelper implements SQLiteHelperInterf
 		openDatabaseCount++;
 		try {
 			if (database == null)
-				database = getWritableDatabase();
+				database = getWritableDatabase(password);
 		} catch (Exception e) {
 			LogCat.printStackTrace(e);
 		}

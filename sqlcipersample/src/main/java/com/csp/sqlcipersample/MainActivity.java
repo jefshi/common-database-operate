@@ -1,14 +1,14 @@
-package com.csp.sqlitesample;
+package com.csp.sqlcipersample;
 
 import android.app.Activity;
 import android.os.Bundle;
 
-import com.csp.sqlitesample.base.BaseSqlciper;
-import com.csp.sqlitesample.operate.MoreTableOperate;
-import com.csp.sqlitesample.operate.PhoneInfoOperate;
-import com.csp.sqlitesample.operate.UserInfoOperate;
-import com.csp.sqlitesample.tblbean.TblPhoneInfo;
-import com.csp.sqlitesample.tblbean.TblUserInfo;
+import com.csp.sqlcipersample.base.BaseSqlciper;
+import com.csp.sqlcipersample.operate.MoreTableOperate;
+import com.csp.sqlcipersample.operate.PhoneInfoOperate;
+import com.csp.sqlcipersample.operate.UserInfoOperate;
+import com.csp.sqlcipersample.tblbean.TblPhoneInfo;
+import com.csp.sqlcipersample.tblbean.TblUserInfo;
 
 public class MainActivity extends Activity {
 

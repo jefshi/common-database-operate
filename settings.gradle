@@ -1,1 +1,1 @@
-include ':databaseoperate', ':sqlitesample'
+include ':databaseoperate', ':sqlitesample', ':sqlcipersample'
