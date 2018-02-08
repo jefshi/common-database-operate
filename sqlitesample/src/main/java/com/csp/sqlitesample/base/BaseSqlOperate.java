@@ -251,23 +251,6 @@ public abstract class BaseSqlOperate<T extends TableBeanInterface> implements Sq
 		return execSQLByTransaction((String[]) sqls.toArray());
 	}
 
-	/**
-	 * 连接数据库, 一次操作只调用一次
-	 *
-	 * @param context context
-	 */
-	public static void openDatabase(Context context) {
-		SQLiteHelper.getInstance(context).openDatabase(null);
-	}
-
-	/**
-	 * 关闭数据库连接
-	 *
-	 * @param context context
-	 */
-	public static void closeDatabase(Context context) {
-		SQLiteHelper.getInstance(context).closeDatabase();
-	}
 
 	/**
 	 * 字符串是否为空
@@ -275,7 +258,7 @@ public abstract class BaseSqlOperate<T extends TableBeanInterface> implements Sq
 	 * @param str 字符串
 	 * @return true: 是
 	 */
-	public static boolean isEmpty(String str) {
+	public boolean isEmpty(String str) {
 		return str == null || str.trim().isEmpty();
 	}
 
@@ -285,7 +268,7 @@ public abstract class BaseSqlOperate<T extends TableBeanInterface> implements Sq
 	 * @param list 集合
 	 * @return true: 是
 	 */
-	public static boolean isEmpty(List list) {
+	public boolean isEmpty(List list) {
 		return list == null || list.isEmpty();
 	}
 
@@ -295,78 +278,7 @@ public abstract class BaseSqlOperate<T extends TableBeanInterface> implements Sq
 	 * @param array 集合
 	 * @return true: 是
 	 */
-	public static boolean isEmpty(Object[] array) {
+	public boolean isEmpty(Object[] array) {
 		return array == null || array.length == 0;
-	}
-
-	/**
-	 * Log 打印数据库数据
-	 *
-	 * @param sqlciper 需要查询的数据库操作对象
-	 * @param explain  打印说明
-	 * @return Log 日志
-	 */
-	private static String printData(BaseSqlOperate sqlciper, String explain) {
-		List data = sqlciper.getData();
-
-		String msgTop = isEmpty(explain) ? "" : explain + "][";
-		msgTop = "\n--[" + msgTop + "表, " + sqlciper.getTableName() + "]";
-
-		String msg = "";
-		if (isEmpty(data)) {
-			msg = msgTop + ": null";
-		} else {
-			for (int i = 0; i < data.size(); i++) {
-				msg += msgTop + "[" + i + "]: " + String.valueOf(data.get(i));
-			}
-		}
-		return msg;
-	}
-
-	/**
-	 * Log 打印数据库数据
-	 *
-	 * @param sqlciper 需要查询的数据库操作对象
-	 * @param explain  查询作用说明
-	 */
-	@SuppressWarnings("PointlessBooleanExpression")
-	public static void printOneData(Context context, BaseSqlOperate sqlciper, String explain) {
-		if (!DatabaseConfig.DEBUG)
-			return;
-
-		SQLiteHelper sqLiteHelper = SQLiteHelper.getInstance(context);
-		sqLiteHelper.openDatabase(null);
-
-		String msgTop = isEmpty(explain) ? "" : explain + "][";
-		String msg = "--[" + msgTop + "数据库查询][开始]------------------------------";
-		msg += printData(sqlciper, explain);
-		msg += "\n--[" + msgTop + "数据库查询][开始]------------------------------";
-		LogCat.e(2, msg);
-
-		sqLiteHelper.closeDatabase();
-	}
-
-	/**
-	 * Log 打印所有数据库数据
-	 *
-	 * @param context context
-	 * @param explain 查询作用说明
-	 */
-	@SuppressWarnings("PointlessBooleanExpression")
-	public static void printAllData(Context context, String explain) {
-		if (!DatabaseConfig.DEBUG)
-			return;
-
-		SQLiteHelper sqLiteHelper = SQLiteHelper.getInstance(context);
-		sqLiteHelper.openDatabase(null);
-
-		String msgTop = isEmpty(explain) ? "" : explain + "][";
-		String msg = "--[" + msgTop + "数据库查询][开始]------------------------------";
-		msg += printData(new UserInfoOperate(context), null);
-		msg += printData(new PhoneInfoOperate(context), null);
-		msg += "\n--[" + msgTop + "数据库查询][结束]------------------------------";
-		LogCat.e(2, msg);
-
-		sqLiteHelper.closeDatabase();
 	}
 }

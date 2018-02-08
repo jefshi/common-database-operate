@@ -53,11 +53,11 @@ BaseSqlOperate.closeDatabase(this); // close database
 ``` java
 public interface TableFields {
     // table name, field name, field type, pk field
-	TableField TBL_USER_INFO = new TableField(
-			"userInfo",
-			new String[]{"userId", "status", "createDate", "updateDate"},
-			new String[]{"text", "text", "text", "text"},
-			new String[]{"userId"});
+    TableField TBL_USER_INFO = new TableField(
+            "userInfo",
+            new String[]{"userId", "status", "createDate", "updateDate"},
+            new String[]{"text", "text", "text", "text"},
+            new String[]{"userId"});
 }
 ```
 ### 3. 完成表的记录对象的 Bean，需要继承接口 TableBeanInterface
@@ -65,21 +65,21 @@ public interface TableFields {
 ``` java
 public interface TableBeanInterface {
 
-	String[] toFieldsValue();
+    String[] toFieldsValue();
 
-	String[] toPKFieldsValue();
+    String[] toPKFieldsValue();
 
-	void setCreateDate(long createDate);
+    void setCreateDate(long createDate);
 
-	void setUpdateDate(long updateDate);
+    void setUpdateDate(long updateDate);
 }
 ```
 推荐实现方式，具体可参考 sample 代码：
 ``` java
 public class TblUserInfo implements TableBeanInterface {
-	private long _id;
-	private long createDate;
-	private long updateDate;
+    private long _id;
+    private long createDate;
+    private long updateDate;
 
     private String userId;
     private String status;
@@ -90,48 +90,48 @@ public class TblUserInfo implements TableBeanInterface {
 ``` java
 public interface SqlOperateInterface<T extends TableBeanInterface> {
 
-	boolean addData(T dbObject);
+    boolean addData(T dbObject);
 
-	boolean addData(List<T> data);
+    boolean addData(List<T> data);
 
-	boolean delData(String[] whereKey, String[] whereValue);
+    boolean delData(String[] whereKey, String[] whereValue);
 
-	boolean delData(T dbObject);
+    boolean delData(T dbObject);
 
-	boolean upData(T dbObject);
+    boolean upData(T dbObject);
 
-	boolean upData(List<T> data);
+    boolean upData(List<T> data);
 
-	List<T> getData(String[] whereKey, String[] whereValue, String[] orderKey);
+    List<T> getData(String[] whereKey, String[] whereValue, String[] orderKey);
 
-	T getDatum(String[] whereKey, String[] whereValue, String[] orderKey);
+    T getDatum(String[] whereKey, String[] whereValue, String[] orderKey);
 
-	List<T> querySQL(String sql, String[] value);
+    List<T> querySQL(String sql, String[] value);
 
-	boolean execSQL(String sql);
+    boolean execSQL(String sql);
 
-	boolean execSQLByTransaction(String[] sqls);
+    boolean execSQLByTransaction(String[] sqls);
 
-	boolean execSQLByTransaction(List<T> sqls);
+    boolean execSQLByTransaction(List<T> sqls);
 }
 ```
 推荐实现方式，具体可参考 sample 代码：
 ``` java
 // abstract class, 实现通用的增删改查
 public abstract class BaseSqlOperate<T extends TableBeanInterface> implements SqlOperateInterface<T> {
-	private SQLiteHelperInterface sqLiteHelper;
-	private TableField tableField;
-	private SqlGenerate sqlGenerate;
-	private Class<T> tblBeanClass;
+    private SQLiteHelperInterface sqLiteHelper;
+    private TableField tableField;
+    private SqlGenerate sqlGenerate;
+    private Class<T> tblBeanClass;
 }
 
 // 具体表的操作类
 public class UserInfoOperate extends BaseSqlOperate<TblUserInfo> {
-	public UserInfoOperate(Context context) {
-		super(context, TableFields.TBL_USER_INFO, TblUserInfo.class);
-	}
+    public UserInfoOperate(Context context) {
+        super(context, TableFields.TBL_USER_INFO, TblUserInfo.class);
+    }
 
-	// 其他单独业务操作
+    // 其他单独业务操作
 }
 ```
 ### 5. 完成数据库文件的操作，通过继承接口 SQLiteHelperInterface 实现
@@ -139,35 +139,35 @@ public class UserInfoOperate extends BaseSqlOperate<TblUserInfo> {
 ``` java
 public interface SQLiteHelperInterface {
 
-	void createDatabase(String password);
+    void createDatabase(String password);
 
-	boolean deleteDatabase();
+    boolean deleteDatabase();
 
-	void openDatabase(String password);
+    void openDatabase(String password);
 
-	void closeDatabase();
+    void closeDatabase();
 
-	Cursor querySQL(String sql, String[] selectionArgs);
+    Cursor querySQL(String sql, String[] selectionArgs);
 
-	void execSQL(String sql);
+    void execSQL(String sql);
 
-	void beginTransaction();
+    void beginTransaction();
 
-	void setTransactionSuccessful();
+    void setTransactionSuccessful();
 
-	void endTransaction();
+    void endTransaction();
 }
 ```
 推荐实现方式，具体可参考 sample 代码：
 ``` java
 public class SQLiteHelper extends SQLiteOpenHelper implements SQLiteHelperInterface {
-	public final static String DATABASE_NAME = "sqlite.db";
-	public final static int DATABASE_VERSION = 1;
-	private final String ERROR_DATABASE_OPEN_FAILED = "database open failed";
+    public final static String DATABASE_NAME = "sqlite.db";
+    public final static int DATABASE_VERSION = 1;
+    private final String ERROR_DATABASE_OPEN_FAILED = "database open failed";
 
-	private static SQLiteHelper instance; // Singleton mode
-	private SQLiteDatabase database;
-	private int openDatabaseCount = 0; // if count less than 0, invoke close()
+    private static SQLiteHelper instance; // Singleton mode
+    private SQLiteDatabase database;
+    private int openDatabaseCount = 0; // if count less than 0, invoke close()
 }
 ```
 

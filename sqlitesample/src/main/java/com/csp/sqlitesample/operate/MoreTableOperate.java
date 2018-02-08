@@ -14,16 +14,5 @@ import com.csp.sqlitesample.base.SQLiteHelper;
  * @since common-database-operate 1.0.0
  */
 public class MoreTableOperate {
-	/**
-	 * 数据库重置
-	 *
-	 * @param context context
-	 * @return true: 操作成功
-	 */
-	public static boolean resetDatabase(Context context) {
-		SQLiteHelper sqLiteHelper = SQLiteHelper.getInstance(context);
-		sqLiteHelper.deleteDatabase();
-		sqLiteHelper.createDatabase(null);
-		return true;
-	}
+
 }

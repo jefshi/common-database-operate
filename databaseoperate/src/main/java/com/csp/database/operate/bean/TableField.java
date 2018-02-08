@@ -6,7 +6,6 @@ import com.csp.database.operate.interfaces.TableBeanInterface;
  * Description: table field info
  * <p>Create Date: 2017/4/24
  * <p>Modify Date: 无
- * <p>Github: https://github.com/jefshi/common-database-operate.git
  *
  * @author csp
  * @version 1.0.0
@@ -18,8 +17,6 @@ public final class TableField {
 	/*
 	 * TODO 所有字段以及类型集合，建表默认追加：
 	 * 1. _id  integer primary key autoincrement
-	 * 2. createDate integer not null
-	 * 3. updateDate integer not null
 	 */
 	private String[] fields;
 	private String[] fieldsType;
