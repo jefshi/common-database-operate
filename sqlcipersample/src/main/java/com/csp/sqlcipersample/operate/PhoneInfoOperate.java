@@ -2,7 +2,7 @@ package com.csp.sqlcipersample.operate;
 
 import android.content.Context;
 
-import com.csp.sqlcipersample.base.BaseSqlciper;
+import com.csp.sqlcipersample.base.BaseSqlOperate;
 import com.csp.sqlcipersample.config.TableFields;
 import com.csp.sqlcipersample.tblbean.TblPhoneInfo;
 
@@ -15,7 +15,7 @@ import com.csp.sqlcipersample.tblbean.TblPhoneInfo;
  * @version 1.0.0
  * @since common-database-operate 1.0.0
  */
-public class PhoneInfoOperate extends BaseSqlciper<TblPhoneInfo> {
+public class PhoneInfoOperate extends BaseSqlOperate<TblPhoneInfo> {
 	public PhoneInfoOperate(Context context) {
 		super(context, TableFields.TBL_PHONE_INFO, TblPhoneInfo.class);
 	}

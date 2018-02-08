@@ -6,7 +6,7 @@ import android.database.Cursor;
 import com.csp.database.operate.base.SqlGenerate;
 import com.csp.database.operate.bean.TableField;
 import com.csp.database.operate.interfaces.SQLiteHelperInterface;
-import com.csp.database.operate.interfaces.SqlciperInterface;
+import com.csp.database.operate.interfaces.SqlOperateInterface;
 import com.csp.database.operate.interfaces.TableBeanInterface;
 import com.csp.sqlcipersample.config.DatabaseConfig;
 import com.csp.sqlcipersample.operate.PhoneInfoOperate;
@@ -21,13 +21,13 @@ import java.util.List;
  * Created by csp on 2017/4/21.
  * Description: 数据库基础操作类
  */
-public abstract class BaseSqlciper<T extends TableBeanInterface> implements SqlciperInterface<T> {
+public abstract class BaseSqlOperate<T extends TableBeanInterface> implements SqlOperateInterface<T> {
 	private SQLiteHelperInterface sqLiteHelper;
 	private TableField tableField;
 	private Class<T> tblBeanClass; // 表数据对象类型
 	private SqlGenerate sqlGenerate;
 
-	public BaseSqlciper(Context context, TableField tableField, Class<T> tblBeanClass) {
+	public BaseSqlOperate(Context context, TableField tableField, Class<T> tblBeanClass) {
 		sqLiteHelper = SQLiteHelper.getInstance(context);
 		this.tableField = tableField;
 		this.tblBeanClass = tblBeanClass;
@@ -301,7 +301,7 @@ public abstract class BaseSqlciper<T extends TableBeanInterface> implements Sqlc
 	 * @param explain  打印说明
 	 * @return Log 日志
 	 */
-	private static String printData(BaseSqlciper sqlciper, String explain) {
+	private static String printData(BaseSqlOperate sqlciper, String explain) {
 		List data = sqlciper.getData();
 
 		String msgTop = isEmpty(explain) ? "" : explain + "][";
@@ -325,7 +325,7 @@ public abstract class BaseSqlciper<T extends TableBeanInterface> implements Sqlc
 	 * @param explain  查询作用说明
 	 */
 	@SuppressWarnings("PointlessBooleanExpression")
-	public static void printOneData(Context context, BaseSqlciper sqlciper, String explain) {
+	public static void printOneData(Context context, BaseSqlOperate sqlciper, String explain) {
 		if (!DatabaseConfig.DEBUG)
 			return;
 

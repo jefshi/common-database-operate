@@ -12,7 +12,7 @@ import java.util.List;
  * @version 1.0.0
  * @since common-database-operate 1.0.0
  */
-public interface SqlciperInterface<T extends TableBeanInterface> {
+public interface SqlOperateInterface<T extends TableBeanInterface> {
 	/**
 	 * insert 操作
 	 *
@@ -100,10 +100,18 @@ public interface SqlciperInterface<T extends TableBeanInterface> {
 	boolean execSQL(String sql);
 
 	/**
-	 * 使用事务执行自定义 SQL
+	 * 使用事务执行批量 SQL
 	 *
-	 * @param sql SQL语句
+	 * @param sqls SQL语句
 	 * @return true: 操作成功
 	 */
 	boolean execSQLByTransaction(String[] sqls);
+
+	/**
+	 * 使用事务执行批量 SQL
+	 *
+	 * @param sqls SQL语句
+	 * @return true: 操作成功
+	 */
+	boolean execSQLByTransaction(List<T> sqls);
 }

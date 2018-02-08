@@ -2,7 +2,7 @@ package com.csp.sqlitesample.operate;
 
 import android.content.Context;
 
-import com.csp.sqlitesample.base.BaseSqlciper;
+import com.csp.sqlitesample.base.BaseSqlOperate;
 import com.csp.sqlitesample.config.TableFields;
 import com.csp.sqlitesample.tblbean.TblUserInfo;
 
@@ -15,7 +15,7 @@ import com.csp.sqlitesample.tblbean.TblUserInfo;
  * @version 1.0.0
  * @since common-database-operate 1.0.0
  */
-public class UserInfoOperate extends BaseSqlciper<TblUserInfo> {
+public class UserInfoOperate extends BaseSqlOperate<TblUserInfo> {
 	public UserInfoOperate(Context context) {
 		super(context, TableFields.TBL_USER_INFO, TblUserInfo.class);
 	}

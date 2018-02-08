@@ -3,7 +3,7 @@ package com.csp.sqlcipersample;
 import android.app.Activity;
 import android.os.Bundle;
 
-import com.csp.sqlcipersample.base.BaseSqlciper;
+import com.csp.sqlcipersample.base.BaseSqlOperate;
 import com.csp.sqlcipersample.operate.MoreTableOperate;
 import com.csp.sqlcipersample.operate.PhoneInfoOperate;
 import com.csp.sqlcipersample.operate.UserInfoOperate;
@@ -19,7 +19,7 @@ public class MainActivity extends Activity {
 
 		MoreTableOperate.resetDatabase(this);
 
-		BaseSqlciper.openDatabase(this);
+		BaseSqlOperate.openDatabase(this);
 
 		UserInfoOperate uio = new UserInfoOperate(this);
 
@@ -39,8 +39,8 @@ public class MainActivity extends Activity {
 
 		new PhoneInfoOperate(this).addData(tblPhoneInfo);
 
-		BaseSqlciper.closeDatabase(this);
+		BaseSqlOperate.closeDatabase(this);
 
-		BaseSqlciper.printAllData(this, null);
+		BaseSqlOperate.printAllData(this, null);
 	}
 }

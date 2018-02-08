@@ -19,12 +19,13 @@ import com.csp.sqlitesample.util.LogCat;
 public class SQLiteHelper extends SQLiteOpenHelper implements SQLiteHelperInterface {
 	public final static String DATABASE_NAME = "sqlite.db";
 	public final static int DATABASE_VERSION = 1;
+	private final String ERROR_DATABASE_OPEN_FAILED = "database open failed";
 
-	private final String DATABASE_NOT_OPEN = "database not open"; // 错误信息: 数据库未连接成功、数据库不存在
-	private final Context context;
-	private static SQLiteHelper instance = null;
+	private static SQLiteHelper instance; // Singleton mode
 	private SQLiteDatabase database;
-	private int openDatabaseCount = 0; // 连接数据库次数
+	private int openDatabaseCount = 0; // if count less than 0, invoke close()
+
+	private final Context context;
 
 	private SQLiteHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -99,7 +100,7 @@ public class SQLiteHelper extends SQLiteOpenHelper implements SQLiteHelperInterf
 	@Override
 	public Cursor querySQL(String sql, String[] selectionArgs) {
 		if (database == null)
-			throw new IllegalStateException(DATABASE_NOT_OPEN);
+			throw new IllegalStateException(ERROR_DATABASE_OPEN_FAILED);
 		else
 			return database.rawQuery(sql, selectionArgs);
 	}
@@ -112,7 +113,7 @@ public class SQLiteHelper extends SQLiteOpenHelper implements SQLiteHelperInterf
 	@Override
 	public void beginTransaction() {
 		if (database == null)
-			throw new IllegalStateException(DATABASE_NOT_OPEN);
+			throw new IllegalStateException(ERROR_DATABASE_OPEN_FAILED);
 
 		database.beginTransaction();
 	}
@@ -120,7 +121,7 @@ public class SQLiteHelper extends SQLiteOpenHelper implements SQLiteHelperInterf
 	@Override
 	public void setTransactionSuccessful() {
 		if (database == null)
-			throw new IllegalStateException(DATABASE_NOT_OPEN);
+			throw new IllegalStateException(ERROR_DATABASE_OPEN_FAILED);
 
 		database.setTransactionSuccessful();
 	}
@@ -128,7 +129,7 @@ public class SQLiteHelper extends SQLiteOpenHelper implements SQLiteHelperInterf
 	@Override
 	public void endTransaction() {
 		if (database == null)
-			throw new IllegalStateException(DATABASE_NOT_OPEN);
+			throw new IllegalStateException(ERROR_DATABASE_OPEN_FAILED);
 
 		database.endTransaction();
 	}

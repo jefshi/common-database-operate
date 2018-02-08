@@ -10,13 +10,13 @@ public interface TableFields {
 	TableField TBL_USER_INFO = new TableField(
 			"userInfo",
 			new String[]{"userId", "status", "createDate", "updateDate"},
-			null,
+			new String[]{"text", "text", "text", "text"},
 			new String[]{"userId"});
 
 	TableField TBL_PHONE_INFO = new TableField(
 			"phoneInfo",
 			new String[]{"userId", "phone", "createDate", "updateDate"},
-			null,
+			new String[]{"text", "text", "text", "text"},
 			new String[]{"userId", "phone"});
 
 	TableField[] ALL_TABLES = new TableField[]{
