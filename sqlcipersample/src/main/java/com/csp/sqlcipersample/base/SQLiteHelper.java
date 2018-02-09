@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.csp.database.operate.base.SqlGenerate;
 import com.csp.database.operate.bean.TableField;
-import com.csp.database.operate.interfaces.SQLiteHelperInterface;
+import com.csp.database.operate.interfaces.SqlOpenHelperInterface;
 import com.csp.sqlcipersample.config.DatabaseConfig;
 import com.csp.sqlcipersample.config.TableFields;
 import com.csp.sqlitesample.util.LogCat;
@@ -17,7 +17,7 @@ import net.sqlcipher.database.SQLiteOpenHelper;
  * Description: SQLiteOpenHelper 工具类
  * Created by csp on 2017/04/24.
  */
-public class SQLiteHelper extends SQLiteOpenHelper implements SQLiteHelperInterface {
+public class SQLiteHelper extends SQLiteOpenHelper implements SqlOpenHelperInterface {
 	public final static String DATABASE_NAME = "sqlite.db";
 	public final static int DATABASE_VERSION = 1;
 

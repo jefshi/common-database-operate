@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * Description: sql generate
- * <p>Create Date: 2017/4/24
+ * <p>Create Date: 2017/04/24
  * <p>Modify Date: 无
  *
  * @author csp

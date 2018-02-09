@@ -3,15 +3,15 @@ package com.csp.database.operate.interfaces;
 import android.database.Cursor;
 
 /**
- * Description: SQLiteOpenHelper interface
- * <p>Create Date: 2017/4/24
+ * Description: database operate interface, include open/connect, close, delete ...
+ * <p>Create Date: 2017/04/24
  * <p>Modify Date: 无
  *
  * @author csp
  * @version 1.0.0
  * @since common-database-operate 1.0.0
  */
-public interface SQLiteHelperInterface {
+public interface SqlOpenHelperInterface {
 	/**
 	 * 创建数据库
 	 *

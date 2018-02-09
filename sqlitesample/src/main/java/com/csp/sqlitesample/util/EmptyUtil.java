@@ -1,7 +1,6 @@
 package com.csp.sqlitesample.util;
 
 import java.util.Collection;
-import java.util.List;
 
 /**
  * Description: 判定数据是否为空
@@ -27,11 +26,11 @@ public class EmptyUtil {
 	/**
 	 * 集合是否为空
 	 *
-	 * @param list 集合
+	 * @param collection 集合
 	 * @return true: 是
 	 */
-	public static boolean isEmpty(Collection list) {
-		return list == null || list.isEmpty();
+	public static boolean isEmpty(Collection collection) {
+		return collection == null || collection.isEmpty();
 	}
 
 	/**

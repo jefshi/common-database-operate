@@ -1,4 +1,4 @@
-package com.csp.sqlitesample.config;
+package com.csp.sqlitesample.database.config;
 
 /**
  * Description: 数据库配置
@@ -12,6 +12,6 @@ package com.csp.sqlitesample.config;
 public interface DatabaseConfig {
     boolean DEBUG = true;
 
-    // sqlciper 用
-    boolean ENCRYPT = true;
+    String DATABASE_NAME = "sqlite.db";
+    int DATABASE_VERSION = 1;
 }

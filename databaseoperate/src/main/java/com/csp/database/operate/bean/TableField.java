@@ -4,8 +4,8 @@ import com.csp.database.operate.interfaces.TableBeanInterface;
 
 /**
  * Description: table field info
- * <p>Create Date: 2017/4/24
- * <p>Modify Date: 无
+ * <p>Create Date: 2017/04/24
+ * <p>Modify Date: 2018/02/07
  *
  * @author csp
  * @version 1.0.0

@@ -1,10 +1,11 @@
-package com.csp.sqlitesample.operate;
+package com.csp.sqlitesample.database.operate;
 
 import android.content.Context;
 
-import com.csp.sqlitesample.base.BaseSqlOperate;
-import com.csp.sqlitesample.config.TableFields;
-import com.csp.sqlitesample.tblbean.TblPhoneInfo;
+import com.csp.sqlitesample.database.base.BaseOperate;
+import com.csp.sqlitesample.database.config.TableFields;
+import com.csp.sqlitesample.database.tblbean.TblPhoneInfo;
+
 
 /**
  * Description: tbl_test 表操作类
@@ -15,7 +16,7 @@ import com.csp.sqlitesample.tblbean.TblPhoneInfo;
  * @version 1.0.0
  * @since common-database-operate 1.0.0
  */
-public class PhoneInfoOperate extends BaseSqlOperate<TblPhoneInfo> {
+public class PhoneInfoOperate extends BaseOperate<TblPhoneInfo> {
 	public PhoneInfoOperate(Context context) {
 		super(context, TableFields.TBL_PHONE_INFO, TblPhoneInfo.class);
 	}

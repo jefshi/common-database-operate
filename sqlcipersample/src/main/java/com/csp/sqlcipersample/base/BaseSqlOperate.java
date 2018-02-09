@@ -5,7 +5,7 @@ import android.database.Cursor;
 
 import com.csp.database.operate.base.SqlGenerate;
 import com.csp.database.operate.bean.TableField;
-import com.csp.database.operate.interfaces.SQLiteHelperInterface;
+import com.csp.database.operate.interfaces.SqlOpenHelperInterface;
 import com.csp.database.operate.interfaces.SqlOperateInterface;
 import com.csp.database.operate.interfaces.TableBeanInterface;
 import com.csp.sqlcipersample.config.DatabaseConfig;
@@ -22,7 +22,7 @@ import java.util.List;
  * Description: 数据库基础操作类
  */
 public abstract class BaseSqlOperate<T extends TableBeanInterface> implements SqlOperateInterface<T> {
-	private SQLiteHelperInterface sqLiteHelper;
+	private SqlOpenHelperInterface sqLiteHelper;
 	private TableField tableField;
 	private Class<T> tblBeanClass; // 表数据对象类型
 	private SqlGenerate sqlGenerate;
@@ -57,12 +57,12 @@ public abstract class BaseSqlOperate<T extends TableBeanInterface> implements Sq
 	}
 
 	@Override
-	public boolean addData(T dbObject) {
-		if (dbObject == null)
+	public boolean addData(T datum) {
+		if (datum == null)
 			return false;
 
 		List<T> list = new ArrayList<>();
-		list.add(dbObject);
+		list.add(datum);
 		return addData(list);
 	}
 
@@ -91,17 +91,17 @@ public abstract class BaseSqlOperate<T extends TableBeanInterface> implements Sq
 	}
 
 	@Override
-	public boolean delData(T dbObject) {
-		return delData(getPKField(), dbObject.toPKFieldsValue());
+	public boolean delData(T datum) {
+		return delData(getPKField(), datum.toPKFieldsValue());
 	}
 
 	@Override
-	public boolean upData(T dbObject) {
-		if (dbObject == null)
+	public boolean upData(T datum) {
+		if (datum == null)
 			return false;
 
 		List<T> list = new ArrayList<>();
-		list.add(dbObject);
+		list.add(datum);
 		return upData(list);
 	}
 

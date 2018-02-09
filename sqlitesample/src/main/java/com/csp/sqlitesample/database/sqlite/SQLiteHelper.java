@@ -1,4 +1,4 @@
-package com.csp.sqlitesample.base;
+package com.csp.sqlitesample.database.sqlite;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -7,18 +7,18 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.csp.database.operate.base.SqlGenerate;
 import com.csp.database.operate.bean.TableField;
-import com.csp.database.operate.interfaces.SQLiteHelperInterface;
-import com.csp.sqlitesample.config.DatabaseConfig;
-import com.csp.sqlitesample.config.TableFields;
+import com.csp.database.operate.interfaces.SqlOpenHelperInterface;
+import com.csp.sqlitesample.database.config.DatabaseConfig;
+import com.csp.sqlitesample.database.config.TableFields;
 import com.csp.sqlitesample.util.LogCat;
 
 /**
  * Description: SQLiteOpenHelper 工具类
  * Created by csp on 2017/04/24.
  */
-public class SQLiteHelper extends SQLiteOpenHelper implements SQLiteHelperInterface {
-	public final static String DATABASE_NAME = "sqlite.db";
-	public final static int DATABASE_VERSION = 1;
+public class SQLiteHelper extends SQLiteOpenHelper implements SqlOpenHelperInterface {
+	public final static String DATABASE_NAME = DatabaseConfig.DATABASE_NAME;
+	public final static int DATABASE_VERSION = DatabaseConfig.DATABASE_VERSION;
 	private final String ERROR_DATABASE_OPEN_FAILED = "database open failed";
 
 	private static SQLiteHelper instance; // Singleton mode

@@ -1,4 +1,4 @@
-package com.csp.sqlitesample.config;
+package com.csp.sqlitesample.database.config;
 
 import com.csp.database.operate.bean.TableField;
 

@@ -1,12 +1,12 @@
-package com.csp.sqlitesample.tblbean;
+package com.csp.sqlitesample.database.tblbean;
 
-import com.csp.sqlitesample.base.BaseTableBean;
 import com.csp.database.operate.bean.TableField;
-import com.csp.sqlitesample.config.TableFields;
+import com.csp.sqlitesample.database.base.BaseTableBean;
+import com.csp.sqlitesample.database.config.TableFields;
 
-public class TblUserInfo extends BaseTableBean {
+public class TblPhoneInfo extends BaseTableBean {
     private String userId;
-    private String status;
+    private String phone;
 //    private String createDate;
 //    private String updateDate;
 
@@ -18,12 +18,12 @@ public class TblUserInfo extends BaseTableBean {
         this.userId = userId;
     }
 
-    public String getStatus() {
-        return status;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     @Override
@@ -34,7 +34,7 @@ public class TblUserInfo extends BaseTableBean {
     @Override
     public String[] toFieldsValue() {
         return new String[]{
-               getUserId(), getStatus(), getCreateDate() + "", getUpdateDate() + ""
+                getUserId(), getPhone(), getCreateDate() + "", getUpdateDate() + ""
         };
     }
 

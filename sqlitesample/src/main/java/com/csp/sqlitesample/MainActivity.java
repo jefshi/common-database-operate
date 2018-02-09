@@ -3,13 +3,12 @@ package com.csp.sqlitesample;
 import android.app.Activity;
 import android.os.Bundle;
 
-import com.csp.sqlitesample.base.BaseSqlOperate;
-import com.csp.sqlitesample.base.DatabaseOperate;
-import com.csp.sqlitesample.operate.MoreTableOperate;
-import com.csp.sqlitesample.operate.PhoneInfoOperate;
-import com.csp.sqlitesample.operate.UserInfoOperate;
-import com.csp.sqlitesample.tblbean.TblPhoneInfo;
-import com.csp.sqlitesample.tblbean.TblUserInfo;
+import com.csp.sqlitesample.database.operate.MoreTableOperate;
+import com.csp.sqlitesample.database.operate.PhoneInfoOperate;
+import com.csp.sqlitesample.database.operate.UserInfoOperate;
+import com.csp.sqlitesample.database.sqlite.DatabaseOperate;
+import com.csp.sqlitesample.database.tblbean.TblPhoneInfo;
+import com.csp.sqlitesample.database.tblbean.TblUserInfo;
 
 public class MainActivity extends Activity {
 
@@ -18,7 +17,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        DatabaseOperate.resetDatabase(this);
+        MoreTableOperate.resetDatabase(this);
         DatabaseOperate.openDatabase(this);
 
         try {
@@ -49,6 +48,6 @@ public class MainActivity extends Activity {
 
         DatabaseOperate.closeDatabase(this);
 
-        DatabaseOperate.printAllData(this, null);
+        DatabaseOperate.printAllTable(this, null);
     }
 }
