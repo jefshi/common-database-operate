@@ -3,44 +3,68 @@ package com.csp.sqlcipersample;
 import android.app.Activity;
 import android.os.Bundle;
 
-import com.csp.sqlcipersample.base.BaseSqlOperate;
-import com.csp.sqlcipersample.operate.MoreTableOperate;
-import com.csp.sqlcipersample.operate.PhoneInfoOperate;
-import com.csp.sqlcipersample.operate.UserInfoOperate;
-import com.csp.sqlcipersample.tblbean.TblPhoneInfo;
-import com.csp.sqlcipersample.tblbean.TblUserInfo;
+import com.csp.database.operate.util.LogCat;
+import com.csp.sqlitesample.database.operate.DatabaseOperate;
+import com.csp.sqlitesample.database.operate.PhoneInfoOperate;
+import com.csp.sqlitesample.database.operate.UserInfoOperate;
+import com.csp.sqlitesample.database.tblbean.TblPhoneInfo;
+import com.csp.sqlitesample.database.tblbean.TblUserInfo;
 
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Description: MainActivity
+ * <p>Create Date: 2018/02/06
+ * <p>Modify Date: nothing
+ *
+ * @author csp
+ * @version 1.0.0
+ * @since common-database-operate 1.0.0
+ */
 public class MainActivity extends Activity {
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-		MoreTableOperate.resetDatabase(this);
+        LogCat.setDebug(true);
 
-		BaseSqlOperate.openDatabase(this);
+        DatabaseOperate.resetDatabase(this);
+        DatabaseOperate.openDatabase(this);
 
-		UserInfoOperate uio = new UserInfoOperate(this);
+        try {
+            DatabaseOperate.beginTransaction(this);
 
-		TblUserInfo tblUserInfo = new TblUserInfo();
-		tblUserInfo.setUserId("police");
-		tblUserInfo.setStatus("enable");
-		uio.addData(tblUserInfo);
+            List<TblUserInfo> tblUserInfos = new ArrayList<>();
+            TblUserInfo tblUserInfo = new TblUserInfo();
+            tblUserInfo.setUserId("police");
+            tblUserInfo.setStatus("enable");
+            tblUserInfos.add(tblUserInfo);
 
-		tblUserInfo = new TblUserInfo();
-		tblUserInfo.setUserId("firemen");
-		tblUserInfo.setStatus("enable");
-		uio.addData(tblUserInfo);
+            tblUserInfo = new TblUserInfo();
+            tblUserInfo.setUserId("firemen");
+            tblUserInfo.setStatus("enable");
+            tblUserInfos.add(tblUserInfo);
 
-		TblPhoneInfo tblPhoneInfo = new TblPhoneInfo();
-		tblPhoneInfo.setUserId("police");
-		tblPhoneInfo.setPhone("110");
+            UserInfoOperate uio = new UserInfoOperate(this);
+           uio.addData(tblUserInfos);
 
-		new PhoneInfoOperate(this).addData(tblPhoneInfo);
+            TblPhoneInfo tblPhoneInfo = new TblPhoneInfo();
+            tblPhoneInfo.setUserId("police");
+            tblPhoneInfo.setPhone("110");
+            new PhoneInfoOperate(this).addData(tblPhoneInfo);
 
-		BaseSqlOperate.closeDatabase(this);
+            DatabaseOperate.setTransactionSuccessful(this);
+        } catch (Exception e) {
+            LogCat.printStackTrace(e);
+        } finally {
+            DatabaseOperate.endTransaction(this);
+        }
 
-		BaseSqlOperate.printAllData(this, null);
-	}
+        DatabaseOperate.closeDatabase(this);
+
+        DatabaseOperate.printAllTable(this, null);
+    }
 }

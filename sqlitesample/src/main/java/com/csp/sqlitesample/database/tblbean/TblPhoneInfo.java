@@ -1,14 +1,30 @@
 package com.csp.sqlitesample.database.tblbean;
 
-import com.csp.database.operate.bean.TableField;
-import com.csp.sqlitesample.database.base.BaseTableBean;
-import com.csp.sqlitesample.database.config.TableFields;
+import com.csp.database.operate.bean.TableBeanInterface;
 
-public class TblPhoneInfo extends BaseTableBean {
+/**
+ * Description: 表 phoneInfo 对象
+ * <p>Create Date: 2018/02/06
+ * <p>Modify Date: nothing
+ *
+ * @author csp
+ * @version 1.0.0
+ * @since common-database-operate 1.0.0
+ */
+public class TblPhoneInfo implements TableBeanInterface {
+    private long _id;
     private String userId;
     private String phone;
-//    private String createDate;
-//    private String updateDate;
+
+    @Override
+    public long get_id() {
+        return _id;
+    }
+
+    @Override
+    public void set_id(long _id) {
+        this._id = _id;
+    }
 
     public String getUserId() {
         return userId;
@@ -27,21 +43,25 @@ public class TblPhoneInfo extends BaseTableBean {
     }
 
     @Override
-    public String toString() {
-        return TableField.toString(TableFields.TBL_USER_INFO, this);
-    }
-
-    @Override
     public String[] toFieldsValue() {
         return new String[]{
-                getUserId(), getPhone(), getCreateDate() + "", getUpdateDate() + ""
+                get_id() + "", getUserId(), getPhone()
         };
     }
 
     @Override
-    public String[] toPKFieldsValue() {
+    public String[] toUniqueFieldsValue() {
         return new String[]{
                 getUserId()
         };
+    }
+
+    @Override
+    public String toString() {
+        return "TblPhoneInfo{" +
+                "_id=" + _id +
+                ", userId='" + userId + '\'' +
+                ", phone='" + phone + '\'' +
+                '}';
     }
 }

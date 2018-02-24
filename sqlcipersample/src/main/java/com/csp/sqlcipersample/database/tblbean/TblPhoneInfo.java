@@ -1,4 +1,4 @@
-package com.csp.sqlitesample.database.tblbean;
+package com.csp.sqlcipersample.database.tblbean;
 
 import com.csp.database.operate.bean.TableBeanInterface;
 
@@ -11,10 +11,10 @@ import com.csp.database.operate.bean.TableBeanInterface;
  * @version 1.0.0
  * @since common-database-operate 1.0.0
  */
-public class TblUserInfo implements TableBeanInterface {
+public class TblPhoneInfo implements TableBeanInterface {
     private long _id;
     private String userId;
-    private String status;
+    private String phone;
 
     @Override
     public long get_id() {
@@ -34,18 +34,18 @@ public class TblUserInfo implements TableBeanInterface {
         this.userId = userId;
     }
 
-    public String getStatus() {
-        return status;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     @Override
     public String[] toFieldsValue() {
         return new String[]{
-               get_id() + "", getUserId(), getStatus()
+                get_id() + "", getUserId(), getPhone()
         };
     }
 
@@ -58,10 +58,10 @@ public class TblUserInfo implements TableBeanInterface {
 
     @Override
     public String toString() {
-        return "TblUserInfo{" +
+        return "TblPhoneInfo{" +
                 "_id=" + _id +
                 ", userId='" + userId + '\'' +
-                ", status='" + status + '\'' +
+                ", phone='" + phone + '\'' +
                 '}';
     }
 }

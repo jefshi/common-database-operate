@@ -1,4 +1,4 @@
-package com.csp.sqlitesample.database.config;
+package com.csp.sqlcipersample.database.config;
 
 import com.csp.database.operate.bean.TableField;
 
@@ -12,7 +12,7 @@ import com.csp.database.operate.bean.TableField;
  * @since common-database-operate 1.0.0
  */
 public interface TableFields {
-    String DATABASE_NAME = "sqlitesample.db";
+    String DATABASE_NAME = "sqlcipersample.db";
     int DATABASE_VERSION = 1;
 
     TableField TBL_USER_INFO = new TableField(

@@ -1,4 +1,4 @@
-package com.csp.sqlitesample.database.tblbean;
+package com.csp.sqlcipersample.database.tblbean;
 
 import com.csp.database.operate.bean.TableBeanInterface;
 

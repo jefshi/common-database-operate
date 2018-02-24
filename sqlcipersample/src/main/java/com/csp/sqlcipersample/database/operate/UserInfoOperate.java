@@ -1,9 +1,10 @@
-package com.csp.sqlitesample.database.operate;
+package com.csp.sqlcipersample.database.operate;
 
 import android.content.Context;
 
-import com.csp.sqlitesample.database.config.TableFields;
-import com.csp.sqlitesample.database.tblbean.TblUserInfo;
+import com.csp.sqlcipersample.database.config.TableFields;
+import com.csp.sqlcipersample.database.tblbean.TblUserInfo;
+
 
 /**
  * Description: 表 userInfo 操作类

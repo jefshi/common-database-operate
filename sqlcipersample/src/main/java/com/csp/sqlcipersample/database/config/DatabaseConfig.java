@@ -1,4 +1,4 @@
-package com.csp.sqlitesample.database.config;
+package com.csp.sqlcipersample.database.config;
 
 /**
  * Description: 数据库配置

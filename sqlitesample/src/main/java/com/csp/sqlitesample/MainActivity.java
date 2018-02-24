@@ -3,13 +3,25 @@ package com.csp.sqlitesample;
 import android.app.Activity;
 import android.os.Bundle;
 
-import com.csp.sqlitesample.database.operate.MoreTableOperate;
+import com.csp.database.operate.util.LogCat;
+import com.csp.sqlitesample.database.operate.DatabaseOperate;
 import com.csp.sqlitesample.database.operate.PhoneInfoOperate;
 import com.csp.sqlitesample.database.operate.UserInfoOperate;
-import com.csp.sqlitesample.database.sqlite.DatabaseOperate;
 import com.csp.sqlitesample.database.tblbean.TblPhoneInfo;
 import com.csp.sqlitesample.database.tblbean.TblUserInfo;
 
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Description: MainActivity
+ * <p>Create Date: 2018/02/06
+ * <p>Modify Date: nothing
+ *
+ * @author csp
+ * @version 1.0.0
+ * @since common-database-operate 1.0.0
+ */
 public class MainActivity extends Activity {
 
     @Override
@@ -17,22 +29,27 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        MoreTableOperate.resetDatabase(this);
+        LogCat.setDebug(true);
+
+        DatabaseOperate.resetDatabase(this);
         DatabaseOperate.openDatabase(this);
 
         try {
             DatabaseOperate.beginTransaction(this);
 
-            UserInfoOperate uio = new UserInfoOperate(this);
+            List<TblUserInfo> tblUserInfos = new ArrayList<>();
             TblUserInfo tblUserInfo = new TblUserInfo();
             tblUserInfo.setUserId("police");
             tblUserInfo.setStatus("enable");
-            uio.addData(tblUserInfo);
+            tblUserInfos.add(tblUserInfo);
 
             tblUserInfo = new TblUserInfo();
             tblUserInfo.setUserId("firemen");
             tblUserInfo.setStatus("enable");
-            uio.addData(tblUserInfo);
+            tblUserInfos.add(tblUserInfo);
+
+            UserInfoOperate uio = new UserInfoOperate(this);
+           uio.addData(tblUserInfos);
 
             TblPhoneInfo tblPhoneInfo = new TblPhoneInfo();
             tblPhoneInfo.setUserId("police");
@@ -41,7 +58,7 @@ public class MainActivity extends Activity {
 
             DatabaseOperate.setTransactionSuccessful(this);
         } catch (Exception e) {
-
+            LogCat.printStackTrace(e);
         } finally {
             DatabaseOperate.endTransaction(this);
         }

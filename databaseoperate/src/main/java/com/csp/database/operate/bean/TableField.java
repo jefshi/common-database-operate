@@ -1,66 +1,77 @@
 package com.csp.database.operate.bean;
 
-import com.csp.database.operate.interfaces.TableBeanInterface;
-
 /**
  * Description: table field info
  * <p>Create Date: 2017/04/24
- * <p>Modify Date: 2018/02/07
+ * <p>Modify Date: 2018/02/23
  *
  * @author csp
- * @version 1.0.0
+ * @version 1.0.2
  * @since common-database-operate 1.0.0
  */
+@SuppressWarnings({"unused"})
 public final class TableField {
-	private String tableName;
+    /**
+     * table field type
+     */
+    public interface CFieldType {
+        String TEXT = "text";
+        String INTEGER = "integer";
+    }
 
-	/*
-	 * TODO 所有字段以及类型集合，建表默认追加：
-	 * 1. _id  integer primary key autoincrement
-	 */
-	private String[] fields;
-	private String[] fieldsType;
+    /**
+     * 字段默认追加：_id  integer primary key autoincrement
+     */
+    private String mTableName;
+    private String[] mFields;
+    private String[] mFieldsType;
+    private String[] mUniqueFields;
 
-	// 所有构成主键的字段集合，默认"_id"为主键之一
-	private String[] pkFields;
+    public TableField(String tableName, String[] fields, String[] fieldsType, String[] uniqueFields) {
+        mTableName = tableName;
+        mUniqueFields = uniqueFields;
 
-	public TableField(String tableName, String[] fields, String[] fieldType, String[] pkFields) {
-		this.tableName = tableName;
-		this.fields = fields;
-		this.fieldsType = fieldType;
-		this.pkFields = pkFields;
-	}
+        initFields(fields, fieldsType);
+    }
 
-	public String getTableName() {
-		return tableName;
-	}
+    private void initFields(String[] fields, String[] fieldsType) {
+        int fieldsNum = fields.length + 1;
 
-	public String[] getFields() {
-		return fields;
-	}
+        boolean contain = false;
+        for (String field : fields) {
+            if (field.contains("_id")) {
+                contain = true;
+                break;
+            }
+        }
 
-	public String[] getFieldsType() {
-		return fieldsType;
-	}
+        if (contain) {
+            mFields = fields;
+            mFieldsType = fieldsType;
+        } else {
+            mFields = new String[fieldsNum];
+            System.arraycopy(fields, 0, mFields, 1, fields.length);
+            mFields[0] = "_id";
 
-	public String[] getPkFields() {
-		return pkFields;
-	}
+            mFieldsType = new String[fieldsNum];
+            System.arraycopy(fieldsType, 0, mFieldsType, 1, fieldsType.length);
+            mFieldsType[0] = "integer primary key autoincrement";
+        }
+    }
 
-	/**
-	 * 打印表记录内容
-	 *
-	 * @param tableField 表结构信息
-	 * @param tbl        表记录对象
-	 * @return 表记录对象.toString()
-	 */
-	public static String toString(TableField tableField, TableBeanInterface tbl) {
-		String str = "";
-		String[] fields = tableField.getFields();
-		String[] fieldValues = tbl.toFieldsValue();
-		for (int i = 0; i < fields.length; i++) {
-			str += ", " + fields[i] + "='" + fieldValues[i] + '\'';
-		}
-		return '{' + str.substring(2) + '}';
-	}
+    public String getTableName() {
+        return mTableName;
+    }
+
+    public String[] getFields() {
+        return mFields;
+    }
+
+    public String[] getFieldsType() {
+        return mFieldsType;
+    }
+
+    public String[] getUniqueFields() {
+        return mUniqueFields;
+    }
 }
