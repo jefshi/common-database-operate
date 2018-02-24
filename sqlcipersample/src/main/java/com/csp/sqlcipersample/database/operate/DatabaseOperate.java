@@ -51,7 +51,7 @@ public class DatabaseOperate {
     public static boolean resetDatabase(Context context) {
         SqlciperHelper helper = SqlciperSampleHelper.getInstance(context);
         return helper.deleteDatabase()
-                && helper.createDatabase(null);
+                && helper.createDatabase("aaa");
     }
 
     /**

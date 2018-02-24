@@ -4,11 +4,11 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import com.csp.database.operate.util.LogCat;
-import com.csp.sqlitesample.database.operate.DatabaseOperate;
-import com.csp.sqlitesample.database.operate.PhoneInfoOperate;
-import com.csp.sqlitesample.database.operate.UserInfoOperate;
-import com.csp.sqlitesample.database.tblbean.TblPhoneInfo;
-import com.csp.sqlitesample.database.tblbean.TblUserInfo;
+import com.csp.sqlcipersample.database.operate.DatabaseOperate;
+import com.csp.sqlcipersample.database.operate.PhoneInfoOperate;
+import com.csp.sqlcipersample.database.operate.UserInfoOperate;
+import com.csp.sqlcipersample.database.tblbean.TblPhoneInfo;
+import com.csp.sqlcipersample.database.tblbean.TblUserInfo;
 
 import java.util.ArrayList;
 import java.util.List;

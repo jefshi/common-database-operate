@@ -1,15 +1,17 @@
 package com.csp.sqlcipersample.database.openhelper;
 
+
 import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteDatabase.CursorFactory;
-import android.database.sqlite.SQLiteOpenHelper;
 
 import com.csp.database.operate.bean.TableField;
 import com.csp.database.operate.openhelper.SqlOpenHelperInterface;
 import com.csp.database.operate.sql.SqlGenerate;
 import com.csp.database.operate.util.LogCat;
+
+import net.sqlcipher.Cursor;
+import net.sqlcipher.database.SQLiteDatabase;
+import net.sqlcipher.database.SQLiteDatabase.CursorFactory;
+import net.sqlcipher.database.SQLiteOpenHelper;
 
 /**
  * Description: sqlite open helper
@@ -34,6 +36,7 @@ public class SqlciperHelper extends SQLiteOpenHelper implements SqlOpenHelperInt
         mContext = context;
         mDatabaseName = databaseName;
         mTables = tables;
+        SQLiteDatabase.loadLibs(context);
     }
 
     @Override
@@ -61,7 +64,7 @@ public class SqlciperHelper extends SQLiteOpenHelper implements SqlOpenHelperInt
     public synchronized boolean createDatabase(String password) {
         boolean result = false;
         try {
-            getWritableDatabase();
+            getWritableDatabase(password);
             openDatabaseCount++;
             closeDatabase();
             result = true;
@@ -86,7 +89,7 @@ public class SqlciperHelper extends SQLiteOpenHelper implements SqlOpenHelperInt
         openDatabaseCount++;
         try {
             if (mDatabase == null)
-                mDatabase = getWritableDatabase();
+                mDatabase = getWritableDatabase(password);
         } catch (Exception e) {
             LogCat.printStackTrace(e);
         }

@@ -4,8 +4,8 @@ import android.content.Context;
 
 import com.csp.database.operate.bean.TableBeanInterface;
 import com.csp.database.operate.bean.TableField;
-import com.csp.database.operate.openhelper.SqlciperSampleHelper;
 import com.csp.database.operate.operate.CommonOperate;
+import com.csp.sqlcipersample.database.openhelper.SqlciperSampleHelper;
 
 import java.util.List;
 
