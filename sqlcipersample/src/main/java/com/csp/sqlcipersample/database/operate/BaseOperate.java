@@ -2,7 +2,6 @@ package com.csp.sqlcipersample.database.operate;
 
 import android.content.Context;
 
-import com.csp.database.operate.bean.TableBeanInterface;
 import com.csp.database.operate.bean.TableField;
 import com.csp.database.operate.operate.CommonOperate;
 import com.csp.sqlcipersample.database.openhelper.SqlciperSampleHelper;
@@ -19,7 +18,7 @@ import java.util.List;
  * @since common-database-operate 1.0.0
  */
 @SuppressWarnings("unused")
-public abstract class BaseOperate<T extends TableBeanInterface> extends CommonOperate<T> {
+public abstract class BaseOperate<T> extends CommonOperate<T> {
 
     public BaseOperate(Context context, TableField tableField, Class<T> tblBeanClass) {
         super(SqlciperSampleHelper.getInstance(context), tableField, tblBeanClass);

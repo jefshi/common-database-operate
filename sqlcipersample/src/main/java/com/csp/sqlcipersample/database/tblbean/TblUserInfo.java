@@ -1,6 +1,6 @@
 package com.csp.sqlcipersample.database.tblbean;
 
-import com.csp.database.operate.bean.TableBeanInterface;
+import com.csp.database.operate.annotations.TableFieldName;
 
 /**
  * Description: 表 phoneInfo 对象
@@ -11,17 +11,17 @@ import com.csp.database.operate.bean.TableBeanInterface;
  * @version 1.0.0
  * @since common-database-operate 1.0.0
  */
-public class TblUserInfo implements TableBeanInterface {
+public class TblUserInfo {
+    @TableFieldName("_id")
     private long _id;
+    @TableFieldName("userId")
     private String userId;
     private String status;
 
-    @Override
     public long get_id() {
         return _id;
     }
 
-    @Override
     public void set_id(long _id) {
         this._id = _id;
     }
@@ -40,20 +40,6 @@ public class TblUserInfo implements TableBeanInterface {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    @Override
-    public String[] toFieldsValue() {
-        return new String[]{
-               get_id() + "", getUserId(), getStatus()
-        };
-    }
-
-    @Override
-    public String[] toUniqueFieldsValue() {
-        return new String[]{
-                getUserId()
-        };
     }
 
     @Override

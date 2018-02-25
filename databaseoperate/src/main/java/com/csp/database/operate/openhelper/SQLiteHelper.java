@@ -26,7 +26,7 @@ public class SQLiteHelper extends SQLiteOpenHelper implements SqlOpenHelperInter
     private String mDatabaseName;
     private TableField[] mTables;
     private SQLiteDatabase mDatabase;
-    private int openDatabaseCount = 0; // if count less than 0, invoke close()
+    private int mOpenDatabaseCount = 0; // if count less than 0, invoke close()
 
     public SQLiteHelper(Context context, String databaseName, CursorFactory factory, int version, TableField[] tables) {
         super(context, databaseName, factory, version);
@@ -61,7 +61,7 @@ public class SQLiteHelper extends SQLiteOpenHelper implements SqlOpenHelperInter
         boolean result = false;
         try {
             getWritableDatabase();
-            openDatabaseCount++;
+            mOpenDatabaseCount++;
             closeDatabase();
             result = true;
         } catch (Exception e) {
@@ -74,7 +74,7 @@ public class SQLiteHelper extends SQLiteOpenHelper implements SqlOpenHelperInter
     public synchronized boolean deleteDatabase() {
         if (mContext.deleteDatabase(mDatabaseName)) {
             mDatabase = null;
-            openDatabaseCount = 0;
+            mOpenDatabaseCount = 0;
             return true;
         }
         return false;
@@ -82,7 +82,7 @@ public class SQLiteHelper extends SQLiteOpenHelper implements SqlOpenHelperInter
 
     @Override
     public synchronized void openDatabase(String password) {
-        openDatabaseCount++;
+        mOpenDatabaseCount++;
         try {
             if (mDatabase == null)
                 mDatabase = getWritableDatabase();
@@ -93,11 +93,11 @@ public class SQLiteHelper extends SQLiteOpenHelper implements SqlOpenHelperInter
 
     @Override
     public synchronized void closeDatabase() {
-        openDatabaseCount--;
-        if (openDatabaseCount <= 0) {
+        mOpenDatabaseCount--;
+        if (mOpenDatabaseCount <= 0) {
             this.close();
             mDatabase = null;
-            openDatabaseCount = 0;
+            mOpenDatabaseCount = 0;
         }
     }
 

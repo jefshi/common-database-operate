@@ -1,7 +1,6 @@
 package com.csp.database.operate.operate;
 
 import com.csp.database.operate.bean.TableField;
-import com.csp.database.operate.bean.TableBeanInterface;
 
 import java.util.List;
 
@@ -15,7 +14,7 @@ import java.util.List;
  * @since common-database-operate 1.0.0
  */
 @SuppressWarnings({"unused", "SameParameterValue"})
-public interface SqlOperateInterface<T extends TableBeanInterface> {
+public interface SqlOperateInterface<T> {
 
     /**
      * {@link TableField#getTableName()}

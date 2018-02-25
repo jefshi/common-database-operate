@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.csp.database.operate.operate.CommonOperate;
 import com.csp.database.operate.bean.TableField;
-import com.csp.database.operate.bean.TableBeanInterface;
 import com.csp.sqlitesample.database.openhelper.SqliteSampleHelper;
 
 import java.util.List;
@@ -19,7 +18,7 @@ import java.util.List;
  * @since common-database-operate 1.0.0
  */
 @SuppressWarnings("unused")
-public abstract class BaseOperate<T extends TableBeanInterface> extends CommonOperate<T> {
+public abstract class BaseOperate<T> extends CommonOperate<T> {
 
     public BaseOperate(Context context, TableField tableField, Class<T> tblBeanClass) {
         super(SqliteSampleHelper.getInstance(context), tableField, tblBeanClass);
@@ -31,6 +30,10 @@ public abstract class BaseOperate<T extends TableBeanInterface> extends CommonOp
 
     public List<T> getData(String[] whereKey, String[] whereValue) {
         return getData(whereKey, whereValue, null);
+    }
+
+    public T getDatum() {
+        return getDatum(null, null, null);
     }
 
     public T getDatum(String[] whereKey, String[] whereValue) {

@@ -141,7 +141,7 @@ public class SqlGenerate {
             if (fieldValue[i] == null) {
                 builder.append(" = NULL, ");
             } else {
-                builder.append(" = '").append(fieldValue[i]).append("%s', ");
+                builder.append(" = '").append(fieldValue[i]).append("', ");
             }
         }
         builder.deleteCharAt(builder.length() - 2);
@@ -195,13 +195,13 @@ public class SqlGenerate {
         if (isEmpty(whereKeys))
             return;
 
-        builder.append(" WHERR ");
+        builder.append(" WHERE ");
         for (int i = 0; i < whereKeys.length; i++) {
             builder.append(whereKeys[i]);
             if (whereValues[i] == null) {
                 builder.append(" ISNULL AND ");
             } else {
-                builder.append("='").append(whereValues[i]).append("%s' AND ");
+                builder.append("='").append(whereValues[i]).append("' AND ");
             }
         }
         builder.delete(builder.length() - 4, builder.length());

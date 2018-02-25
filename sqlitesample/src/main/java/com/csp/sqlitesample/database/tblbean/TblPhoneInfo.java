@@ -1,7 +1,5 @@
 package com.csp.sqlitesample.database.tblbean;
 
-import com.csp.database.operate.bean.TableBeanInterface;
-
 /**
  * Description: 表 phoneInfo 对象
  * <p>Create Date: 2018/02/06
@@ -11,17 +9,15 @@ import com.csp.database.operate.bean.TableBeanInterface;
  * @version 1.0.0
  * @since common-database-operate 1.0.0
  */
-public class TblPhoneInfo implements TableBeanInterface {
+public class TblPhoneInfo {
     private long _id;
     private String userId;
     private String phone;
 
-    @Override
     public long get_id() {
         return _id;
     }
 
-    @Override
     public void set_id(long _id) {
         this._id = _id;
     }
@@ -40,20 +36,6 @@ public class TblPhoneInfo implements TableBeanInterface {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    @Override
-    public String[] toFieldsValue() {
-        return new String[]{
-                get_id() + "", getUserId(), getPhone()
-        };
-    }
-
-    @Override
-    public String[] toUniqueFieldsValue() {
-        return new String[]{
-                getUserId()
-        };
     }
 
     @Override

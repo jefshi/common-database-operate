@@ -14,9 +14,12 @@ public final class TableField {
     /**
      * table field type
      */
-    public interface CFieldType {
-        String TEXT = "text";
-        String INTEGER = "integer";
+    public interface Constant {
+        String INHERENT_FIELD_ID = "_id";
+        String INHERENT_FIELD_TYPE_ID = "integer primary key autoincrement";
+
+        String TYPE_TEXT = "text";
+        String TYPE_INTEGER = "integer";
     }
 
     /**
@@ -51,11 +54,11 @@ public final class TableField {
         } else {
             mFields = new String[fieldsNum];
             System.arraycopy(fields, 0, mFields, 1, fields.length);
-            mFields[0] = "_id";
+            mFields[0] = Constant.INHERENT_FIELD_ID;
 
             mFieldsType = new String[fieldsNum];
             System.arraycopy(fieldsType, 0, mFieldsType, 1, fieldsType.length);
-            mFieldsType[0] = "integer primary key autoincrement";
+            mFieldsType[0] = Constant.INHERENT_FIELD_TYPE_ID;
         }
     }
 
